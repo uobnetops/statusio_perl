@@ -170,6 +170,29 @@ sub _doGet {
   }
 }
 
+sub _doPost {
+  my $self = shift;
+  my ($url, $data) = @_;
+
+  my $ua = LWP::UserAgent->new(timeout => 10);
+  $ua->default_header('x-api-id' => $self->API_ID() );
+  $ua->default_header('x-api-key' => $self->API_Key() );
+  $ua->default_header('Content-Type' => 'application/json');
+  
+  my $json = JSON->new->allow_nonref;
+  
+  my $resp = $ua->post($url, Content => $json->encode($data));
+   
+  if ($resp->is_success) {
+    return $resp->decoded_content;
+  }
+  else {
+    die Dumper $resp;
+    return undef;
+  }
+
+}
+
 sub _doDecode {
   my $self  = shift;
   my ($obj) = @_;
