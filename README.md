@@ -28,3 +28,4 @@ ToDo List:
 * add more error handling for non-api related failure modes
 * implement the remaining methods
 * add appropriate POD documentation
+* test suite
