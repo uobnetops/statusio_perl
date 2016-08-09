@@ -21,7 +21,7 @@ sub new {
 }
 
 
-# Components & Containers - TODO
+# Components & Containers
 sub ComponentList {
   my $self = shift;
 
@@ -31,8 +31,17 @@ sub ComponentList {
 
 sub ComponentStatusUpdate {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  my ($components, $containers, $details, $current_status) = @_;
+
+  my $data = {
+    statuspage_id => $self->StatusPageID,
+    components => $components,
+    containers => $containers,
+    details => $details,
+    current_status => $current_status
+  };
+  
+  return $self->_doPost($self->API_URL."component/status/update/", $data)
 }
 
 # Incidents - TODO
@@ -181,7 +190,9 @@ sub _doPost {
   
   my $json = JSON->new->allow_nonref;
   
-  my $resp = $ua->post($url, Content => $json->encode($data));
+  warn $json->encode($data);
+  
+  my $resp = $ua->post($url, Content => $data);
    
   if ($resp->is_success) {
     return $resp->decoded_content;
