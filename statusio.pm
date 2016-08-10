@@ -31,16 +31,8 @@ sub ComponentList {
 
 sub ComponentStatusUpdate {
   my $self = shift;
-  my ($components, $containers, $details, $current_status) = @_;
-
-  my $data = {
-    statuspage_id => $self->StatusPageID,
-    components => $components,
-    containers => $containers,
-    details => $details,
-    current_status => $current_status
-  };
-  
+  my ($data) = @_;
+  $$data{statuspage_id} = $self->StatusPageID;
   return $self->_doPost($self->API_URL."component/status/update/", $data)
 }
 
@@ -189,7 +181,7 @@ sub _doPost {
   
   my $json = JSON->new->allow_nonref;
   
-  warn $json->encode($data);
+  # warn $json->encode($data);
   
   my $resp = $ua->post($url, Content => $data);
    

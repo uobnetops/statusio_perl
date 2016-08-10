@@ -15,6 +15,15 @@ my $sp = new statusio(
   );
 
 my $statusSummary = $sp->StatusSummary();
+
+# Update a component/container
+$sp->ComponentStatusUpdate({
+        components     => ['component-id-list'],
+        containers     => ['component-container-list'],
+        details        => "On Fire",
+        current_status => 500
+        });
+
 ```
 
 All methods are CamelCased versions of the API call.  Eg "incident/list" is $sp->IncidentList();
