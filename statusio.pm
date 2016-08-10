@@ -174,8 +174,7 @@ sub _doGet {
     return $resp->decoded_content;
   }
   else {
-    die Dumper $resp;
-    return undef;
+    return qq|{"status":{"error":"yes","message":"HTTP GET Error: $resp->code(), $resp->message()"}}|;
   }
 }
 
@@ -198,8 +197,7 @@ sub _doPost {
     return $resp->decoded_content;
   }
   else {
-    die Dumper $resp;
-    return undef;
+    return qq|{"status":{"error":"yes","message":"HTTP POST Error: $resp->code(), $resp->message()"}}|;
   }
 
 }
