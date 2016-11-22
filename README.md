@@ -33,7 +33,6 @@ This is a bare-bones POC implementation of the API.  Most methods are not yet im
 
 ToDo List:
 * refactor parameter passing to ComponentStatusUpdate() to accept a datastructure rather than a parameter list
-* parse replies from the API and return an appropriate perl datastructure rather than json
 * add more error handling for non-api related failure modes
 * implement the remaining methods
 * add appropriate POD documentation

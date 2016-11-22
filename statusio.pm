@@ -33,7 +33,8 @@ sub ComponentStatusUpdate {
   my $self = shift;
   my ($data) = @_;
   $$data{statuspage_id} = $self->StatusPageID;
-  return $self->_doPost($self->API_URL."component/status/update/", $data)
+  my $rv = $self->_doPost($self->API_URL."component/status/update/", $data);
+  return $self->_doDecode($rv);
 }
 
 # Incidents - TODO
@@ -44,28 +45,23 @@ sub IncidentList {
 }
 sub IncidentMessage {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub IncidentCreate {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub IncidentUpdate {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub IncidentResolve {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub IncidentDelete {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 
 # Maintenance - TODO
@@ -76,40 +72,33 @@ sub MaintenanceList {
 }
 sub MaintenanceMessage {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub MaintenanceSchedule {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub MaintenanceStart {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub MaintenanceUpdate {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub MaintenanceFinish {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub MaintenanceDelete {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 
 # Metrics - TODO
 sub MetricUpdate {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 
 # Status
@@ -128,18 +117,15 @@ sub SubscriberList {
 }
 sub SubscriberAdd {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub SubscriberUpdate {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 sub SubscriberRemove {
   my $self = shift;
-  die "Method Not Implemented... Yet";
-  return undef;
+  return $self->_doError("Method Not Implemented... Yet");
 }
 
 
@@ -166,7 +152,7 @@ sub _doGet {
     return $resp->decoded_content;
   }
   else {
-    return qq|{"status":{"error":"yes","message":"HTTP GET Error: $resp->code(), $resp->message()"}}|;
+    return $self->_doError("HTTP GET Error: $resp->code(), $resp->message()");
   }
 }
 
@@ -189,7 +175,7 @@ sub _doPost {
     return $resp->decoded_content;
   }
   else {
-    return qq|{"status":{"error":"yes","message":"HTTP POST Error: $resp->code(), $resp->message()"}}|;
+    return $self->_doError("HTTP POST Error: $resp->code(), $resp->message()");
   }
 
 }
@@ -200,6 +186,13 @@ sub _doDecode {
 
   my $json = JSON->new->allow_nonref;
   return $json->decode($obj);
+}
+
+sub _doError {
+  my $self  = shift;
+  my ($txt) = @_;
+  
+  return qq|{"status":{"error":"yes","message":"$txt"}}|;
 }
 
 # Accessors
