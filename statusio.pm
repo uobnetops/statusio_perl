@@ -25,23 +25,22 @@ sub new {
 sub ComponentList {
   my $self = shift;
 
-  my $rv = $self->_doGet($self->API_URL."component/list/".$self->StatusPageID);
-  return $self->_doDecode($rv);
+  return $self->_doGet($self->API_URL."component/list/".$self->StatusPageID);
 }
 
 sub ComponentStatusUpdate {
   my $self = shift;
   my ($data) = @_;
+  
   $$data{statuspage_id} = $self->StatusPageID;
-  my $rv = $self->_doPost($self->API_URL."component/status/update/", $data);
-  return $self->_doDecode($rv);
+  return $self->_doPost($self->API_URL."component/status/update/", $data);
 }
 
 # Incidents - TODO
 sub IncidentList {
   my $self = shift;
-  my $rv = $self->_doGet($self->API_URL."incident/list/".$self->StatusPageID);
-  return $self->_doDecode($rv);
+
+  return $self->_doGet($self->API_URL."incident/list/".$self->StatusPageID);
 }
 sub IncidentMessage {
   my $self = shift;
@@ -67,8 +66,7 @@ sub IncidentDelete {
 # Maintenance - TODO
 sub MaintenanceList {
   my $self = shift;
-  my $rv = $self->_doGet($self->API_URL."maintenance/list/".$self->StatusPageID);
-  return $self->_doDecode($rv);
+  return $self->_doGet($self->API_URL."maintenance/list/".$self->StatusPageID);
 }
 sub MaintenanceMessage {
   my $self = shift;
@@ -105,15 +103,14 @@ sub MetricUpdate {
 sub StatusSummary {
   my $self = shift;
 
-  my $rv = $self->_doGet($self->API_URL."status/summary/".$self->StatusPageID);
-  return $self->_doDecode($rv);
+  return $self->_doGet($self->API_URL."status/summary/".$self->StatusPageID);
 }
 
 # Subscribers - TODO
 sub SubscriberList {
   my $self = shift;
-  my $rv = $self->_doGet($self->API_URL."subscriber/list/".$self->StatusPageID);
-  return $self->_doDecode($rv);
+  
+  return $self->_doGet($self->API_URL."subscriber/list/".$self->StatusPageID);
 }
 sub SubscriberAdd {
   my $self = shift;
@@ -149,7 +146,7 @@ sub _doGet {
   my $resp = $ua->get($url);
   
   if ($resp->is_success) {
-    return $resp->decoded_content;
+    return $self->_doDecode($resp->decoded_content);
   }
   else {
     return $self->_doError("HTTP GET Error: $resp->code(), $resp->message()");
@@ -172,7 +169,7 @@ sub _doPost {
   my $resp = $ua->post($url, Content => $data);
    
   if ($resp->is_success) {
-    return $resp->decoded_content;
+    return $self->_doDecode($resp->decoded_content);
   }
   else {
     return $self->_doError("HTTP POST Error: $resp->code(), $resp->message()");
