@@ -189,7 +189,7 @@ sub _doError {
   my $self  = shift;
   my ($txt) = @_;
   
-  return $json->decode(qq|{"status":{"error":"yes","message":"$txt"}}|);
+  return $self->_doDecode(qq|{"status":{"error":"yes","message":"$txt"}}|);
 }
 
 # Accessors
