@@ -29,11 +29,10 @@ $sp->ComponentStatusUpdate({
 All methods are CamelCased versions of the API call.  Eg "incident/list" is $sp->IncidentList();
 
 ## ToDo
-This is a bare-bones POC implementation of the API.  Most methods are not yet implemented, and there is little to no error checking.  It will be worked on more seriously if/when we start using status.io for something more than a POC.
+This is a bare-bones POC implementation of the API.  There is little to no error checking.  It will be worked on more seriously if/when we start using status.io for something more than a POC.
 
 ToDo List:
-* refactor parameter passing to ComponentStatusUpdate() to accept a datastructure rather than a parameter list
-* add more error handling for non-api related failure modes
-* implement the remaining methods
+* add more error handling for non-api related failure modes (eg missing parameters)
 * add appropriate POD documentation
 * test suite
+* consider refactoring so that we return proper perl objects rather than complex datastructures.  This would make things like "what's the current status of this container/component" easier to answer.
