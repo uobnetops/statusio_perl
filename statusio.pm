@@ -33,7 +33,7 @@ sub ComponentStatusUpdate {
   my ($data) = @_;
   
   $$data{statuspage_id} = $self->StatusPageID;
-  return $self->_doPost($self->API_URL."component/status/update/", $data);
+  return $self->_doPost($self->API_URL."component/status/update", $data);
 }
 
 # Incidents - TODO
@@ -44,23 +44,37 @@ sub IncidentList {
 }
 sub IncidentMessage {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($MessageID) = @_;
+  
+  return $self->_doGet($self->API_URL."incident/message/".$self->StatusPageID."/".$MessageID);
 }
 sub IncidentCreate {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."incident/create", $data);
 }
 sub IncidentUpdate {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."incident/update", $data);
 }
 sub IncidentResolve {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."incident/resolve", $data);
 }
 sub IncidentDelete {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."incident/delete", $data);
 }
 
 # Maintenance - TODO
@@ -70,33 +84,53 @@ sub MaintenanceList {
 }
 sub MaintenanceMessage {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($MessageID) = @_;
+  
+  return $self->_doGet($self->API_URL."maintenance/message/".$self->StatusPageID."/".$MessageID);
 }
 sub MaintenanceSchedule {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."maintenance/schedule", $data);
 }
 sub MaintenanceStart {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."maintenance/start", $data);
 }
 sub MaintenanceUpdate {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."maintenance/update", $data);
 }
 sub MaintenanceFinish {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."maintenance/finish", $data);
 }
 sub MaintenanceDelete {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."maintenance/delete", $data);
 }
 
 # Metrics - TODO
 sub MetricUpdate {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."metreic/update", $data);
 }
 
 # Status
@@ -114,15 +148,24 @@ sub SubscriberList {
 }
 sub SubscriberAdd {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."subscriber/add", $data);
 }
 sub SubscriberUpdate {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."subscriber/update", $data);
 }
 sub SubscriberRemove {
   my $self = shift;
-  return $self->_doError("Method Not Implemented... Yet");
+  my ($data) = @_;
+  
+  $$data{statuspage_id} = $self->StatusPageID;
+  return $self->_doPost($self->API_URL."subscriber/remove", $data);
 }
 
 
