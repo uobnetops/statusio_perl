@@ -15,7 +15,7 @@ BuildRoot:      %{_tmppath}/%{name}-buildroot
 perl libraries for interacting with the status.io api
 
 %prep
-%setup
+%setup -n statusio_perl-%{name}-%{version}
 
 %build
 
