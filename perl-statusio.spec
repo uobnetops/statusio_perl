@@ -10,7 +10,6 @@ BuildArch:      noarch
 Requires:       perl
 Source:         %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-buildroot
-Provides:	perl(statusio)
 
 %description
 perl libraries for interacting with the status.io api
