@@ -2,7 +2,7 @@
 
 Summary:        perl libraries for interacting with the status.io api
 Name:           perl-statusio
-Version:        0.0.01
+Version:        0.0.02
 Release:        0
 Group:          Applications/System
 License:        GPL 3.0
@@ -33,7 +33,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_usr}/share/perl5/vendor_perl/
+%{_usr}/share/perl5/vendor_perl/statusio.pm
 
 %changelog
 * Tue Jan 24 2017 Paul Seward <paul.seward@bristol.ac.uk> - 0.0.01-0
